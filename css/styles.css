@@ -212,6 +212,12 @@ img {
   50% { transform: translateY(-20px); }
 }
 
+/* Subtle drifting used by floating background elements */
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(10px, -15px, 0) scale(1.02); }
+}
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -224,6 +230,44 @@ img {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* ==================== FLOATING BACKGROUND ELEMENTS ==================== */
+.floating-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* Ensure it's behind slide content */
+}
+
+.floating-bg-sm .float-elem {
+  width: 60px;
+  height: 60px;
+  opacity: 0.1;
+}
+
+.float-elem {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 999px;
+  opacity: 0.12;
+  filter: blur(0.5px);
+  background: radial-gradient( circle at 30% 30%, rgba(255,255,255,0.65), rgba(255,255,255,0.1) 60%, rgba(255,255,255,0) 70% );
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  animation: drift 10s ease-in-out infinite;
+}
+
+.float-elem:nth-child(2) { animation-duration: 12s; animation-delay: .4s; }
+.float-elem:nth-child(3) { animation-duration: 14s; animation-delay: .8s; }
+.float-elem:nth-child(4) { animation-duration: 11s; animation-delay: 1.2s; }
+.float-elem:nth-child(5) { animation-duration: 15s; animation-delay: 1.6s; }
+.float-elem:nth-child(6) { animation-duration: 13s; animation-delay: 2s; }
+
+/* Dark mode tuning for floating shapes */
+.dark-mode .float-elem {
+  background: radial-gradient( circle at 30% 30%, rgba(139,156,248,0.35), rgba(139,156,248,0.08) 60%, rgba(139,156,248,0) 70% );
+  opacity: 0.18;
 }
 
 /* ==================== NAVIGATION ==================== */
@@ -828,6 +872,16 @@ img {
   transform: translateY(-10px);
 }
 
+/* Subtle lift for buttons/cards/nav (< 10px as requested) */
+.hover-lift-sm {
+  transition: all 0.3s ease;
+}
+
+.hover-lift-sm:hover,
+.hover-lift-sm:focus-visible {
+  transform: translateY(-5px);
+}
+
 .hover-scale {
   transition: var(--transition-normal);
 }
@@ -842,6 +896,45 @@ img {
 
 .hover-glow:hover {
   box-shadow: var(--shadow-glow);
+}
+
+/* Expanded soft glow on hover/focus */
+.hover-shadow-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-shadow-glow:hover,
+.hover-shadow-glow:focus-visible {
+  box-shadow: 0 14px 40px rgba(102, 126, 234, 0.25);
+}
+
+/* Icon spin utility (gentle 20deg) */
+.icon-spin-on-hover i,
+.icon-spin-on-hover .icon,
+.icon-spin-on-hover .info-icon,
+.icon-spin-on-hover .card-icon {
+  transition: transform 0.3s ease;
+}
+
+.icon-spin-on-hover:hover i,
+.icon-spin-on-hover:hover .icon,
+.icon-spin-on-hover:hover .info-icon,
+.icon-spin-on-hover:hover .card-icon,
+.icon-spin-on-hover:focus-visible i,
+.icon-spin-on-hover:focus-visible .icon,
+.icon-spin-on-hover:focus-visible .info-icon,
+.icon-spin-on-hover:focus-visible .card-icon {
+  transform: rotate(20deg);
+}
+
+/* Base transition helper for color/transform */
+.transition-base { transition: all 0.3s ease; }
+
+/* Focus ring for accessibility */
+.focus-visible-ring:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
 }
 
 /* ==================== SCROLL TO TOP ==================== */
@@ -1801,6 +1894,7 @@ img {
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2581,6 +2675,8 @@ img {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   animation: slideIn 0.5s ease-out;
   min-height: 600px;
+  position: relative; /* Create stacking context above .floating-bg */
+  z-index: 1;
 }
 
 @keyframes slideIn {
@@ -3189,7 +3285,7 @@ img {
 
 /* Lesson Content Scrollbar */
 .lesson-main-content {
-  max-height: calc(100vh - 140px);
+  /* max-height: calc(100vh - 140px); */
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #667eea #e2e8f0;
@@ -3546,4 +3642,10 @@ img {
     height: 45px;
     font-size: 1.125rem;
   }
+}
+p.lead {
+  color: #fff;
+}
+.strong {
+  color: var(--blue-gradient) !important;
 }

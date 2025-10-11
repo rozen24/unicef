@@ -28,6 +28,30 @@ class YouthHealthLMS {
     this.render();
   }
 
+  // Initialize or refresh AOS scroll animations across views
+  initAOS() {
+    if (typeof AOS === "undefined") return;
+    if (this._aosInitialized) {
+      try { AOS.refreshHard(); } catch (e) { AOS.refresh(); }
+      // Ensure measurements after DOM settles
+      setTimeout(() => {
+        try { AOS.refresh(); } catch (e) {}
+      }, 80);
+    } else {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 60,
+        easing: "ease-out-quart",
+      });
+      this._aosInitialized = true;
+      // Defer a refresh to capture late layout changes in SPA renders
+      setTimeout(() => {
+        try { AOS.refresh(); } catch (e) {}
+      }, 100);
+    }
+  }
+
   // Navigation methods
   navigateTo(view) {
     this.currentView = view;
@@ -380,42 +404,43 @@ class YouthHealthLMS {
       case "home":
         app.innerHTML = this.renderHome();
         this.initHomeScripts();
+        this.initAOS();
         break;
       case "login":
         app.innerHTML = this.renderLogin();
+        this.initAOS();
         this.attachLoginHandlers();
         break;
       case "register":
         app.innerHTML = this.renderRegister();
+        this.initAOS();
         this.attachRegisterHandlers();
         break;
       case "dashboard":
         app.innerHTML = this.renderDashboard();
+        this.initAOS();
         break;
       case "course":
         app.innerHTML = this.renderCourse();
+        this.initAOS();
         this.initLessonAudio();
         break;
       case "lesson-slider":
         app.innerHTML = this.renderLessonSlider();
         // Initialize lesson audio controls/state after DOM is ready
         this.initLessonAudio();
+        this.initAOS();
         break;
       case "certificate":
         app.innerHTML = this.renderCertificate();
+        this.initAOS();
         break;
     }
   }
 
   initHomeScripts() {
     // Initialize AOS (if available)
-    if (typeof AOS !== "undefined") {
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100,
-      });
-    }
+    this.initAOS();
 
     // Navbar scroll effect
     const handleScroll = () => {
@@ -572,13 +597,13 @@ class YouthHealthLMS {
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ms-auto">
-                      <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#components">Core Components</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#roles">Roles</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#eligibility">How to Join</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#statistics">Statistics</a></li>
-                      <li class="nav-item"><a href="#" class="btn-modern btn-gradient ms-3" onclick="app.navigateTo('login'); return false;">Login</a></li>
+            <li class="nav-item"><a class="nav-link active transition-base" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link transition-base" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link transition-base" href="#components">Core Components</a></li>
+            <li class="nav-item"><a class="nav-link transition-base" href="#roles">Roles</a></li>
+            <li class="nav-item"><a class="nav-link transition-base" href="#eligibility">How to Join</a></li>
+            <li class="nav-item"><a class="nav-link transition-base" href="#statistics">Statistics</a></li>
+            <li class="nav-item"><a href="#" class="btn-modern btn-gradient ms-3 hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Login</a></li>
                   </ul>
               </div>
           </div>
@@ -595,8 +620,8 @@ class YouthHealthLMS {
                               A strategic joint initiative designed to empower youth by enhancing their health awareness and building their capacity in primary prevention and health promotion, enabling them to serve as informed health ambassadors.
                           </p>
                           <div class="d-flex gap-3 flex-wrap">
-                              <a href="#eligibility" class="btn-modern btn-gradient">Become an Ambassador</a>
-                              <a href="#" class="btn-modern btn-outline-gradient" onclick="app.navigateTo('login'); return false;">Access Login</a>
+                <a href="#eligibility" class="btn-modern btn-gradient hover-lift-sm focus-visible-ring transition-base">Become an Ambassador</a>
+                <a href="#" class="btn-modern btn-outline-gradient hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Access Login</a>
                           </div>
                       </div>
                       <div class="hero-stats">
@@ -621,6 +646,14 @@ class YouthHealthLMS {
                   </div>
               </div>
           </div>
+      <!-- Floating background elements -->
+      <div class="floating-bg" aria-hidden="true">
+      <span class="float-elem" style="top:10%; left:5%;"></span>
+      <span class="float-elem" style="top:20%; right:8%;"></span>
+      <span class="float-elem" style="bottom:15%; left:12%;"></span>
+      <span class="float-elem" style="bottom:10%; right:10%;"></span>
+      <span class="float-elem" style="top:50%; left:45%; width:80px; height:80px;"></span>
+      </div>
       </section>
 
       <!-- Definitions Section -->
@@ -634,7 +667,7 @@ class YouthHealthLMS {
               </div>
               <div class="row g-4 justify-content-center">
                   <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                      <div class="modern-card">
+            <div class="modern-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="d-flex align-items-center mb-3">
                               <div class="card-icon bg-gradient-purple me-3">
                                   <i class="fas fa-users"></i>
@@ -648,7 +681,7 @@ class YouthHealthLMS {
                   </div>
                  
                   <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                      <div class="modern-card">
+            <div class="modern-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="d-flex align-items-center mb-3">
                               <div class="card-icon bg-gradient-teal me-3">
                                   <i class="fas fa-heartbeat"></i>
@@ -679,7 +712,7 @@ class YouthHealthLMS {
               </div>
               <div class="row g-4">
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-purple">
                               <i class="fas fa-book-medical"></i>
                           </div>
@@ -690,7 +723,7 @@ class YouthHealthLMS {
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-blue">
                               <i class="fas fa-graduation-cap"></i>
                           </div>
@@ -701,7 +734,7 @@ class YouthHealthLMS {
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-teal">
                               <i class="fas fa-users"></i>
                           </div>
@@ -712,7 +745,7 @@ class YouthHealthLMS {
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-orange">
                               <i class="fas fa-hand-fist"></i>
                           </div>
@@ -723,7 +756,7 @@ class YouthHealthLMS {
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-green">
                               <i class="fas fa-flag"></i>
                           </div>
@@ -734,7 +767,7 @@ class YouthHealthLMS {
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-                      <div class="info-card">
+            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-pink">
                               <i class="fas fa-bullhorn"></i>
                           </div>
@@ -758,8 +791,8 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="row g-4">
-                  <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-                      <div class="fact-item">
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="fact-item hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="fact-icon">
                               <i class="fas fa-shield-heart"></i>
                           </div>
@@ -768,8 +801,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
-                      <div class="fact-item">
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="fact-item hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="fact-icon">
                               <i class="fas fa-share-nodes"></i>
                           </div>
@@ -778,8 +811,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
-                      <div class="fact-item">
+          <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+            <div class="fact-item hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="fact-icon">
                               <i class="fas fa-handshake"></i>
                           </div>
@@ -788,8 +821,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-md-6" data-aos="fade-left" data-aos-delay="400">
-                      <div class="fact-item">
+          <div class="col-md-6" data-aos="fade-left" data-aos-delay="400">
+            <div class="fact-item hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="fact-icon">
                               <i class="fas fa-chart-line"></i>
                           </div>
@@ -816,64 +849,64 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="row g-4">
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">1</div>
                           <h5 class="step-title">Online Registration</h5>
                           <p class="step-description">Register in the Health Ambassador Programme platform</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">2</div>
                           <h5 class="step-title">Unique ID Generation</h5>
                           <p class="step-description">Receive your unique identification number</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">3</div>
                           <h5 class="step-title">Login to Platform</h5>
                           <p class="step-description">Access the Website/App with your credentials</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">4</div>
                           <h5 class="step-title">Access Course</h5>
                           <p class="step-description">Access comprehensive Health Ambassador course content</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">5</div>
                           <h5 class="step-title">Complete Course</h5>
                           <p class="step-description">Complete all online Health Ambassador modules</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">6</div>
                           <h5 class="step-title">Pass Assessment</h5>
                           <p class="step-description">Obtain passing marks in the final assessment</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">7</div>
                           <h5 class="step-title">System Certification</h5>
                           <p class="step-description">Receive system-generated certification</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">8</div>
                           <h5 class="step-title">Oath Taking</h5>
                           <p class="step-description">Complete self-declaration and oath ceremony</p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
-                      <div class="process-step">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
+            <div class="process-step hover-lift-sm hover-shadow-glow transition-base icon-spin-on-hover">
                           <div class="step-number">9</div>
                           <h5 class="step-title">Final Certificate</h5>
                           <p class="step-description">Receive Final Certificate (Valid for 2 years)</p>
@@ -881,7 +914,7 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="text-center mt-5" data-aos="fade-up">
-                  <a href="#" class="btn-modern btn-gradient btn-lg" onclick="app.navigateTo('register'); return false;">
+          <a href="#" class="btn-modern btn-gradient btn-lg hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('register'); return false;">
                       <i class="fas fa-rocket me-2"></i>Start Your Journey Now
                   </a>
               </div>
@@ -898,8 +931,8 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="row g-4 mb-5">
-                  <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-                      <div class="stat-box">
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stat-box hover-lift-sm hover-shadow-glow transition-base">
                           <div class="stat-icon-large">
                               <i class="fas fa-earth-americas"></i>
                           </div>
@@ -908,8 +941,8 @@ class YouthHealthLMS {
                           <p class="text-muted small">90% live in developing countries</p>
                       </div>
                   </div>
-                  <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                      <div class="stat-box">
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stat-box hover-lift-sm hover-shadow-glow transition-base">
                           <div class="stat-icon-large">
                               <i class="fas fa-users-between-lines"></i>
                           </div>
@@ -918,8 +951,8 @@ class YouthHealthLMS {
                           <p class="text-muted small">Approx. 30% of total population</p>
                       </div>
                   </div>
-                  <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-                      <div class="stat-box">
+          <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stat-box hover-lift-sm hover-shadow-glow transition-base">
                           <div class="stat-icon-large">
                               <i class="fas fa-user-group"></i>
                           </div>
@@ -1178,13 +1211,13 @@ class YouthHealthLMS {
         <!-- Course Grid -->
         <div class="row g-4">
           ${coursesData
-            .map((course) => {
+            .map((course, i) => {
               const progress = this.calculateProgress(course);
               const completed = this.isCourseCompleted(course.id);
 
               return `
-              <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-shadow">
+              <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${(i%6)*100}">
+                <div class="card h-100 shadow-sm hover-shadow hover-lift-sm transition-base">
                   <img src="${course.imageUrl}" class="card-img-top" alt="${
                 course.title
               }" style="height: 200px; object-fit: cover;">
@@ -1219,7 +1252,7 @@ class YouthHealthLMS {
                     <div class="d-flex gap-2">
                       <button class="btn ${
                         completed ? "btn-outline-primary" : "btn-primary"
-                      } flex-grow-1" onclick="app.selectCourse('${course.id}')">
+                      } flex-grow-1 hover-lift-sm focus-visible-ring transition-base" onclick="app.selectCourse('${course.id}')">
                         ${
                           progress === 0
                             ? "Start Course"
@@ -1231,7 +1264,7 @@ class YouthHealthLMS {
                       ${
                         completed
                           ? `
-                        <button class="btn btn-outline-primary" onclick="app.viewCertificate('${course.id}')">
+                        <button class="btn btn-outline-primary hover-lift-sm focus-visible-ring transition-base" onclick="app.viewCertificate('${course.id}')">
                           <i class="bi bi-award"></i>
                         </button>
                       `
@@ -1284,7 +1317,7 @@ class YouthHealthLMS {
 
     return `
       <!-- Header -->
-      <header class="bg-white shadow-sm sticky-top">
+      <header class="bg-white shadow-sm sticky-top" data-aos="fade-down">
         <div class="container py-3">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <button class="btn btn-link text-decoration-none p-0" onclick="app.navigateTo('dashboard')">
@@ -1309,7 +1342,7 @@ class YouthHealthLMS {
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <!-- Lession Navigation -->
-            <div class="card shadow-sm mb-4">
+            <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="100">
               <div class="card-body">
                 <div class="d-flex flex-wrap gap-2">
                   ${this.selectedCourse.lessions
@@ -1334,7 +1367,7 @@ class YouthHealthLMS {
                             : unlocked
                             ? "btn-outline-secondary"
                             : "btn-outline-secondary"
-                        }"
+                        } hover-lift-sm focus-visible-ring transition-base"
                         ${!unlocked ? "disabled" : ""}
                         onclick="app.changelession(${index})"
                       >
@@ -1367,14 +1400,14 @@ class YouthHealthLMS {
             `
                 : `
               <!-- Lession Content -->
-              <div class="card shadow-sm mb-4">
+              <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="150">
                 <div class="card-body p-4">
                   <div class="position-relative">
                     ${
                       currentlession.audioFile
                         ? `
                     <div class="position-absolute top-0 end-0 m-2" style="z-index: 5;">
-                      <button class="btn btn-primary" id="audioToggleBtn" onclick="app.toggleAudio()" style="min-width: 120px;">
+                      <button class="btn btn-primary hover-lift-sm focus-visible-ring transition-base" id="audioToggleBtn" onclick="app.toggleAudio()" style="min-width: 120px;">
                         <i class="bi bi-pause-fill" id="audioIcon"></i>
                         <span id="audioText">Pause</span>
                       </button>
@@ -1386,13 +1419,13 @@ class YouthHealthLMS {
                       ${currentlession.content
                         .map((item, index) => {
                           if (item.type === "text") {
-                            return `<div class="mb-4">${item.data}</div>`;
+                            return `<div class=\"mb-4\" data-aos=\"fade-up\" data-aos-delay=\"${index * 50}\">${item.data}</div>`;
                           }
                           if (item.type === "image") {
-                            return `<div class="mb-4"><img src="${item.data}" class="img-fluid rounded" alt="Lession content"></div>`;
+                            return `<div class=\"mb-4\" data-aos=\"zoom-in\" data-aos-delay=\"${index * 50}\"><img src=\"${item.data}\" class=\"img-fluid rounded\" alt=\"Lession content\"></div>`;
                           }
                           if (item.type === "video") {
-                            return `<div class="ratio ratio-16x9 mb-4"><iframe src="${item.data}" allowfullscreen></iframe></div>`;
+                            return `<div class=\"ratio ratio-16x9 mb-4\" data-aos=\"fade-up\" data-aos-delay=\"${index * 50}\"><iframe src=\"${item.data}\" allowfullscreen></iframe></div>`;
                           }
                           return "";
                         })
@@ -1417,7 +1450,7 @@ class YouthHealthLMS {
               </div>
 
               <!-- Quiz Section -->
-              <div class="card shadow-sm mb-4">
+              <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card-body">
                   <h4 class="mb-3">${
                     islessionCompleted
@@ -1449,7 +1482,7 @@ class YouthHealthLMS {
                     }% to proceed to the next lession.
                   </p>
                   
-                  <button class="btn btn-primary mt-3" onclick="app.startQuiz()">
+                  <button class="btn btn-primary mt-3 hover-lift-sm focus-visible-ring transition-base" onclick="app.startQuiz()">
                     ${islessionCompleted ? "Retake Quiz" : "Start Quiz"}
                   </button>
                 </div>
@@ -1467,7 +1500,7 @@ class YouthHealthLMS {
                         <h4 class="mb-1">Congratulations!</h4>
                         <p class="text-muted mb-0">You've completed all lessions in this course and earned your certificate!</p>
                       </div>
-                      <button class="btn btn-outline-primary" onclick="app.navigateTo('dashboard')">
+                      <button class="btn btn-outline-primary hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('dashboard')">
                         View Certificate
                       </button>
                     </div>
@@ -1768,7 +1801,7 @@ class YouthHealthLMS {
       <!-- Lesson Slider Container -->
       <div class="lesson-slider-container">
         <!-- Topbar -->
-        <div class="lesson-topbar">
+        <div class="lesson-topbar" data-aos="fade-down">
           <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <button class="btn btn-link text-white text-decoration-none p-0" onclick="app.navigateTo('dashboard')">
@@ -1799,7 +1832,7 @@ class YouthHealthLMS {
         <div class="container-fluid">
           <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3">
+            <div class="col-md-3" data-aos="fade-right" data-aos-delay="50">
               <div class="lesson-sidebar">
                 ${course.lessons
                   .map(
@@ -1819,13 +1852,13 @@ class YouthHealthLMS {
             </div>
 
             <!-- Main Content -->
-            <div class="col-md-9">
+            <div class="col-md-9" data-aos="fade-left" data-aos-delay="100">
               <div class="lesson-main-content">
                 ${
                   currentLesson.audioFile
                     ? `
                 <div class="d-flex justify-content-end" style="top: 0; z-index: 5; padding-top: .25rem; padding-bottom: 1.25rem;">
-                  <button class="btn btn-primary" id="audioToggleBtn" onclick="app.toggleAudio()" style="min-width: 120px;">
+                  <button class="btn btn-primary hover-lift-sm focus-visible-ring transition-base" id="audioToggleBtn" onclick="app.toggleAudio()" style="min-width: 120px;">
                     <i class="bi bi-pause-fill" id="audioIcon"></i>
                     <span id="audioText">Pause</span>
                   </button>
@@ -1877,7 +1910,7 @@ class YouthHealthLMS {
                         currentLesson.quiz.passingScore
                       }% to proceed.
                     </p>
-                    <button class="btn btn-primary" onclick="app.startQuiz()">${
+                    <button class="btn btn-primary hover-lift-sm focus-visible-ring transition-base" onclick="app.startQuiz()">${
                       this.getUserProgress(
                         course.id
                       )?.completedlessions?.includes(currentLesson.id)
@@ -1894,7 +1927,7 @@ class YouthHealthLMS {
                   ${
                     (this.currentLessonIndex || 0) > 0
                       ? `
-                    <button class="btn btn-outline-primary lesson-nav-btn" onclick="app.previousLesson()">
+                    <button class="btn btn-outline-primary lesson-nav-btn hover-lift-sm focus-visible-ring transition-base" onclick="app.previousLesson()">
                       <i class="fas fa-arrow-left me-2"></i>Previous Lesson
                     </button>
                   `
@@ -1904,12 +1937,12 @@ class YouthHealthLMS {
                   ${
                     (this.currentLessonIndex || 0) < course.lessons.length - 1
                       ? `
-                    <button class="btn btn-primary lesson-nav-btn" onclick="app.nextLesson()">
+                    <button class="btn btn-primary lesson-nav-btn hover-lift-sm focus-visible-ring transition-base" onclick="app.nextLesson()">
                       Next Lesson<i class="fas fa-arrow-right ms-2"></i>
                     </button>
                   `
                       : `
-                    <button class="btn btn-success lesson-nav-btn" onclick="app.completeLesson()">
+                    <button class="btn btn-success lesson-nav-btn hover-lift-sm focus-visible-ring transition-base" onclick="app.completeLesson()">
                       <i class="fas fa-check-circle me-2"></i>Complete Course
                     </button>
                   `
