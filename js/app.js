@@ -587,77 +587,88 @@ class YouthHealthLMS {
   renderHome() {
     return `
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg fixed-top">
-          <div class="container">
-              <a class="navbar-brand" href="#" onclick="app.navigateTo('home'); return false;">
-                  <img src="img/Unicef Logo-01.png" alt="" style="width: 100%; height: 50px;">
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active transition-base" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link transition-base" href="#about">About</a></li>
-            <li class="nav-item"><a class="nav-link transition-base" href="#components">Core Components</a></li>
-            <li class="nav-item"><a class="nav-link transition-base" href="#roles">Roles</a></li>
-            <li class="nav-item"><a class="nav-link transition-base" href="#eligibility">How to Join</a></li>
-            <li class="nav-item"><a class="nav-link transition-base" href="#statistics">Statistics</a></li>
-            <li class="nav-item"><a href="#" class="btn-modern btn-gradient ms-3 hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Login</a></li>
-                  </ul>
-              </div>
+      <nav class="navbar navbar-expand-lg fixed-top navbar-neo">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="app.navigateTo('home'); return false;">
+            <img src="img/UNICEF_Logo.png" alt="UNICEF Logo" style="width: 120px; height: 48px; object-fit: contain;">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+              <li class="nav-item"><a class="nav-link active transition-base" href="#home">Home</a></li>
+              <li class="nav-item"><a class="nav-link transition-base" href="#about">About</a></li>
+              <li class="nav-item"><a class="nav-link transition-base" href="#components">Components</a></li>
+              <li class="nav-item"><a class="nav-link transition-base" href="#roles">Roles</a></li>
+              <li class="nav-item"><a class="nav-link transition-base" href="#eligibility">Join</a></li>
+              <li class="nav-item"><a class="nav-link transition-base" href="#statistics">Stats</a></li>
+              <li class="nav-item ms-lg-3"><a href="#" class="btn-cta-primary hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Login</a></li>
+            </ul>
           </div>
+        </div>
       </nav>
 
       <!-- Hero Section -->
-      <section id="home" class="hero-section">
-          <div class="container">
-              <div class="row align-items-center">
-                  <div class="col-lg-7" data-aos="fade-right">
-                      <div class="hero-content">
-                          <h1 class="hero-title">Youth Health Ambassador Programme</h1>
-                          <p class="hero-description">
-                              A strategic joint initiative designed to empower youth by enhancing their health awareness and building their capacity in primary prevention and health promotion, enabling them to serve as informed health ambassadors.
-                          </p>
-                          <div class="d-flex gap-3 flex-wrap">
-                <a href="#eligibility" class="btn-modern btn-gradient hover-lift-sm focus-visible-ring transition-base">Become an Ambassador</a>
-                <a href="#" class="btn-modern btn-outline-gradient hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Access Login</a>
-                          </div>
-                      </div>
-                      <div class="hero-stats">
-                          <div class="stat-item">
-                              <span class="stat-number">49.5M</span>
-                              <span class="stat-label">Young People in <br> Bangladesh</span>
-                          </div>
-                          <div class="stat-item">
-                              <span class="stat-number">15-24</span>
-                              <span class="stat-label">Age Group</span>
-                          </div>
-                          <div class="stat-item">
-                              <span class="stat-number">30% </span>
-                              <span class="stat-label">of <br>Total Population</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-5" data-aos="fade-left">
-                      <div class="animate-float">
-                          <img src="img/Asset 2.png" alt="Youth Health" class="img-fluid" style="position: relative; z-index: 2;">
-                      </div>
-                  </div>
+      <section id="home" class="hero-section hero-neo">
+        <!-- Background ornaments -->
+        <div class="bg-ornaments" aria-hidden="true">
+          <span class="orb orb-1"></span>
+          <span class="orb orb-2"></span>
+          <span class="orb orb-3"></span>
+        </div>
+        <div class="container position-relative" style="z-index: 2;">
+          <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-right">
+              <div class="hero-content">
+                <div class="hero-badges">
+                  <span class="badge-pill">Health Literacy</span>
+                  <span class="badge-pill">Peer Influence</span>
+                  <span class="badge-pill">Advocacy</span>
+                </div>
+                <h1 class="hero-title display-gradient">Youth Health Ambassador Programme</h1>
+                <p class="hero-description">
+                  A joint initiative empowering youth through primary prevention and health promotion—building capacity to lead as informed health ambassadors.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                  <a href="#eligibility" class="btn-cta-primary hover-lift-sm focus-visible-ring transition-base">Become an Ambassador</a>
+                  <a href="#" class="btn-cta-secondary hover-lift-sm focus-visible-ring transition-base" onclick="app.navigateTo('login'); return false;">Access Login</a>
+                </div>
               </div>
+              <div class="hero-stats">
+                <div class="stat-item glass-card">
+                  <span class="stat-number">49.5M</span>
+                  <span class="stat-label">Young People in <br> Bangladesh</span>
+                </div>
+                <div class="stat-item glass-card">
+                  <span class="stat-number">15-24</span>
+                  <span class="stat-label">Age Group</span>
+                </div>
+                <div class="stat-item glass-card">
+                  <span class="stat-number">30%</span>
+                  <span class="stat-label">of <br>Total Population</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5" data-aos="fade-left">
+              <div class="animate-float">
+                <img src="img/Asset 2.png" alt="Youth Health" class="img-fluid" style="position: relative; z-index: 2; filter: drop-shadow(0 20px 40px rgba(0,0,0,.25));">
+              </div>
+            </div>
           </div>
-      <!-- Floating background elements -->
-      <div class="floating-bg" aria-hidden="true">
-      <span class="float-elem" style="top:10%; left:5%;"></span>
-      <span class="float-elem" style="top:20%; right:8%;"></span>
-      <span class="float-elem" style="bottom:15%; left:12%;"></span>
-      <span class="float-elem" style="bottom:10%; right:10%;"></span>
-      <span class="float-elem" style="top:50%; left:45%; width:80px; height:80px;"></span>
-      </div>
+        </div>
+        <!-- Floating background elements -->
+        <div class="floating-bg" aria-hidden="true">
+          <span class="float-elem" style="top:10%; left:5%;"></span>
+          <span class="float-elem" style="top:20%; right:8%;"></span>
+          <span class="float-elem" style="bottom:15%; left:12%;"></span>
+          <span class="float-elem" style="bottom:10%; right:10%;"></span>
+          <span class="float-elem" style="top:55%; left:45%; width:80px; height:80px;"></span>
+        </div>
       </section>
 
       <!-- Definitions Section -->
-      <section id="about" class="section-padding bg-light">
+  <section id="about" class="section-padding section-soft">
           <div class="container">
               <div class="row justify-content-center">
                   <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
@@ -666,8 +677,8 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="row g-4 justify-content-center">
-                  <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="modern-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+    <div class="modern-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="d-flex align-items-center mb-3">
                               <div class="card-icon bg-gradient-purple me-3">
                                   <i class="fas fa-users"></i>
@@ -680,8 +691,8 @@ class YouthHealthLMS {
                       </div>
                   </div>
                  
-                  <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="modern-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+    <div class="modern-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="d-flex align-items-center mb-3">
                               <div class="card-icon bg-gradient-teal me-3">
                                   <i class="fas fa-heartbeat"></i>
@@ -702,7 +713,7 @@ class YouthHealthLMS {
       </section>
 
       <!-- Core Components Section -->
-      <section id="components" class="section-padding">
+  <section id="components" class="section-padding section-contrast">
           <div class="container">
               <div class="row justify-content-center">
                   <div class="col-lg-8 text-center mb-5" data-aos="fade-up">
@@ -711,8 +722,8 @@ class YouthHealthLMS {
                   </div>
               </div>
               <div class="row g-4">
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-purple">
                               <i class="fas fa-book-medical"></i>
                           </div>
@@ -722,8 +733,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-blue">
                               <i class="fas fa-graduation-cap"></i>
                           </div>
@@ -733,8 +744,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-teal">
                               <i class="fas fa-users"></i>
                           </div>
@@ -744,8 +755,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-orange">
                               <i class="fas fa-hand-fist"></i>
                           </div>
@@ -755,8 +766,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-green">
                               <i class="fas fa-flag"></i>
                           </div>
@@ -766,8 +777,8 @@ class YouthHealthLMS {
                           </p>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-            <div class="info-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+    <div class="info-card glass-card hover-shadow-glow hover-lift-sm transition-base icon-spin-on-hover">
                           <div class="info-icon bg-gradient-pink">
                               <i class="fas fa-bullhorn"></i>
                           </div>

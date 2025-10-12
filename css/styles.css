@@ -2,27 +2,27 @@
 
 /* ==================== ROOT VARIABLES ==================== */
 :root {
-  /* Modern Color Palette */
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --info-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-  --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --blue-gradient: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-  --teal-gradient: linear-gradient(135deg, #00bcd4 0%, #009688 100%);
-  --orange-gradient: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
-  --green-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-  --pink-gradient: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
-  
+  /* Modern Color Palette - Ocean/UNICEF Blue Refresh */
+  --primary-gradient: linear-gradient(135deg, #00AEEF 0%, #0077C8 100%);
+  --secondary-gradient: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  --success-gradient: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  --info-gradient: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  --warning-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  --purple-gradient: linear-gradient(135deg, #00AEEF 0%, #0077C8 100%);
+  --blue-gradient: linear-gradient(135deg, #00AEEF 0%, #0077C8 100%);
+  --teal-gradient: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+  --orange-gradient: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  --green-gradient: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  --pink-gradient: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+
   /* Hero Gradient */
-  --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  --hero-overlay: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
-  
+  --hero-gradient: linear-gradient(135deg, #00AEEF 0%, #0077C8 50%, #005B99 100%);
+  --hero-overlay: linear-gradient(135deg, rgba(0, 174, 239, 0.92) 0%, rgba(0, 119, 200, 0.92) 100%);
+
   /* Colors */
-  --primary-color: #667eea;
-  --secondary-color: #764ba2;
-  --accent-color: #f093fb;
+  --primary-color: #00AEEF; /* UNICEF Blue */
+  --secondary-color: #0077C8;
+  --accent-color: #60a5fa;
   --text-dark: #2d3748;
   --text-light: #718096;
   --white: #ffffff;
@@ -61,7 +61,7 @@ html {
 body {
   font-family: var(--font-secondary);
   color: #1a202c;
-  background-color: #f7fafc;
+  background-color: #f6fafe;
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -237,7 +237,7 @@ img {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0; /* Ensure it's behind slide content */
+  z-index: 1; /* Above hero overlays, below content */
 }
 
 .floating-bg-sm .float-elem {
@@ -330,6 +330,28 @@ img {
   color: var(--primary-color) !important;
 }
 
+/* Neo Glass Navbar variant (home only) */
+.navbar-neo {
+  background: radial-gradient(1000px 200px at 50% -100px, rgba(255,255,255,0.85), rgba(255,255,255,0.55)) !important;
+  backdrop-filter: blur(16px) saturate(120%);
+  border-bottom: 1px solid rgba(0, 174, 239, 0.12);
+}
+.navbar-neo .navbar-brand {
+  background: linear-gradient(135deg, #00AEEF, #0077C8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.navbar-neo .nav-link {
+  border-radius: 999px;
+  color: #0f172a !important;
+}
+.navbar-neo .nav-link.active,
+.navbar-neo .nav-link:hover {
+  background: rgba(0, 174, 239, 0.08);
+  color: #0077C8 !important;
+}
+
 /* ==================== BUTTONS ==================== */
 .btn-modern {
   font-family: var(--font-secondary);
@@ -414,8 +436,8 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%);
-  z-index: 1;
+  background: var(--hero-overlay);
+  z-index: 0; /* Push behind floating shapes */
 }
 
 .hero-section::after {
@@ -424,17 +446,75 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-  opacity: 0.2;
-  z-index: 1;
+  /* Subtle wave pattern overlay */
+  background: url("data:image/svg+xml,%3Csvg width='240' height='120' viewBox='0 0 240 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop stop-color='%23ffffff' stop-opacity='0.25' offset='0'/%3E%3Cstop stop-color='%23ffffff' stop-opacity='0.05' offset='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 60 C 40 40, 80 80, 120 60 S 200 80, 240 60' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M0 90 C 40 70, 80 110, 120 90 S 200 110, 240 90' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M0 30 C 40 10, 80 50, 120 30 S 200 50, 240 30' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: 480px 240px;
+  opacity: 0.25;
+  z-index: 0; /* Behind floating shapes, above gradient */
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Above floating shapes */
   color: #ffffff;
   padding: 2rem 0;
 }
+
+/* Neo hero enhancements */
+.hero-neo {
+  isolation: isolate;
+}
+.display-gradient {
+  background: conic-gradient(from 120deg, #ffffff, #dff7ff, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-badges {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem;
+}
+.badge-pill {
+  padding: .4rem .75rem; border-radius: 999px; font-weight: 600; font-size: .85rem;
+  background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+}
+
+/* Decorative background ornaments */
+.bg-ornaments { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(6px); opacity: .25; mix-blend-mode: screen; }
+.orb-1 { width: 420px; height: 420px; background: radial-gradient(circle, #29d3ff 0%, rgba(41,211,255,.0) 60%); top: -60px; left: -100px; }
+.orb-2 { width: 320px; height: 320px; background: radial-gradient(circle, #00c2ff 0%, rgba(0,194,255,.0) 60%); bottom: -40px; right: 10%; }
+.orb-3 { width: 240px; height: 240px; background: radial-gradient(circle, #7dd3fc 0%, rgba(125,211,252,.0) 60%); top: 20%; right: -60px; }
+
+/* CTA buttons */
+.btn-cta-primary {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fbff 100%);
+  color: #0077C8; font-weight: 800; border: 2px solid rgba(255,255,255,0.55);
+  border-radius: 999px; padding: 14px 28px; box-shadow: 0 10px 30px rgba(0, 119, 200, .25);
+}
+.btn-cta-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0, 119, 200, .35); }
+.btn-cta-secondary {
+  background: rgba(255,255,255,0.08); color: #fff; border: 2px solid rgba(255,255,255,0.35);
+  border-radius: 999px; padding: 14px 28px; backdrop-filter: blur(8px);
+}
+.btn-cta-secondary:hover { transform: translateY(-3px); background: rgba(255,255,255,0.15); }
+
+/* Glass card look */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 174, 239, 0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  backdrop-filter: blur(6px);
+}
+.modern-card.glass-card { border-radius: 22px; }
+
+/* Section variants */
+.section-soft { background: linear-gradient(180deg, #f6fafe 0%, #eef7ff 100%); }
+.section-contrast { background: radial-gradient(100% 120% at 0% 0%, #e6f7ff 0%, #f6fafe 50%, #eef7ff 100%); }
+
+/* Curved divider holder (SVG inline provides shape) */
+.divider-curve { position: relative; line-height: 0; height: 60px; }
+.divider-curve svg { display: block; width: 100%; height: 60px; }
 
 .hero-title {
   font-size: 3rem;
