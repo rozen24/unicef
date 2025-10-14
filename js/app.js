@@ -1812,7 +1812,7 @@ class YouthHealthLMS {
       <!-- Lesson Slider Container -->
       <div class="lesson-slider-container">
         <!-- Topbar -->
-        <div class="lesson-topbar" data-aos="fade-down">
+        <div class="lesson-topbar" data-aos="">
           <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <button class="btn btn-link text-white text-decoration-none p-0" onclick="app.navigateTo('dashboard')">
@@ -1843,7 +1843,7 @@ class YouthHealthLMS {
         <div class="container-fluid">
           <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3" data-aos="fade-right" data-aos-delay="50">
+            <div class="col-md-3" data-aos="" data-aos-delay="50">
               <div class="lesson-sidebar">
                 ${course.lessons
                   .map(
@@ -1863,7 +1863,7 @@ class YouthHealthLMS {
             </div>
 
             <!-- Main Content -->
-            <div class="col-md-9" data-aos="fade-left" data-aos-delay="100">
+            <div class="col-md-9" data-aos="" data-aos-delay="100">
               <div class="lesson-main-content">
                 ${
                   currentLesson.audioFile
