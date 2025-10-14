@@ -56,6 +56,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(102, 126, 234) rgb(226, 232, 240);
 }
 
 body {
@@ -63,7 +65,11 @@ body {
   color: #1a202c;
   background-color: #f6fafe;
   line-height: 1.7;
-  overflow-x: hidden;
+  /* scrollbar-width: thin;
+  scrollbar-color: rgb(102, 126, 234) rgb(226, 232, 240);
+  background: white;
+  border-right: 2px solid rgb(226, 232, 240);
+  padding: 1.5rem 0px; */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2677,8 +2683,8 @@ img {
   border-right: 2px solid #e2e8f0;
   padding: 1.5rem 0;
   position: sticky;
-  top: 120px;
-  max-height: calc(100vh - 140px);
+  top: var(--lesson-sticky-offset, 150px);
+  max-height: calc(100vh - var(--lesson-sticky-offset, 150px) - 20px);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #667eea #e2e8f0;
@@ -3728,4 +3734,10 @@ p.lead {
 }
 .strong {
   color: var(--blue-gradient) !important;
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: #fff;
+    background-color: var(--blue-gradient);
+    border-color: var(--blue-gradient);
 }

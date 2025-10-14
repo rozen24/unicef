@@ -1461,7 +1461,7 @@ class YouthHealthLMS {
               </div>
 
               <!-- Quiz Section -->
-              <div class="card shadow-sm mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="card shadow-sm my-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card-body">
                   <h4 class="mb-3">${
                     islessionCompleted
@@ -1886,7 +1886,7 @@ class YouthHealthLMS {
                 ${currentLesson.content}
 
                 <!-- Quiz Card for Lesson -->
-                <div class="card shadow-sm mb-4">
+                <div class="card shadow-sm my-4">
                   <div class="card-body">
                     <h4 class="mb-3">${
                       this.getUserProgress(
