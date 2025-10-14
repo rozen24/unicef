@@ -590,7 +590,7 @@ class YouthHealthLMS {
       <nav class="navbar navbar-expand-lg fixed-top navbar-neo">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center gap-2" href="#" onclick="app.navigateTo('home'); return false;">
-            <img src="img/Unicef Logo-01.png" alt="UNICEF Logo" style="width: 100%; height: 48px; object-fit: contain;">
+            <img src="img/Unicef Logo-01.png" alt="UNICEF Logo" style="width: 100%; height: 60px; object-fit: contain;">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -1050,7 +1050,7 @@ class YouthHealthLMS {
         <div class="container py-3">
           <div class="d-flex align-items-center gap-2">
             <a class="navbar-brand" href="#" onclick="app.navigateTo('home'); return false;">
-                  <img src="img/UNICEF_Logo.png" alt="" style="width: 120px; height: 50px;">
+                  <img src="img/Unicef Logo-01.png" alt="UNICEF Logo" style="width: 100%; height: 60px; object-fit: contain;">
             </a>
           </div>
         </div>
@@ -1106,7 +1106,7 @@ class YouthHealthLMS {
         <div class="container py-3">
           <div class="d-flex align-items-center gap-2">
             <a class="navbar-brand" href="#" onclick="app.navigateTo('home'); return false;">
-                  <img src="img/UNICEF_Logo.png" alt="" style="width: 120px; height: 50px;">
+                  <img src="img/Unicef Logo-01.png" alt="UNICEF Logo" style="width: 100%; height: 60px; object-fit: contain;">
             </a>
           </div>
         </div>
@@ -1173,7 +1173,7 @@ class YouthHealthLMS {
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center gap-2">
               <a class="navbar-brand" href="#" onclick="app.navigateTo('home'); return false;">
-                  <img src="img/UNICEF_Logo.png" alt="" style="width: 120px; height: 50px;">
+                  <img src="img/Unicef Logo-01.png" alt="UNICEF Logo" style="width: 100%; height: 60px; object-fit: contain;">
               </a>
             </div>
             <div class="d-flex align-items-center gap-3">
